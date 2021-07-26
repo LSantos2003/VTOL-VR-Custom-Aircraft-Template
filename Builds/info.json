@@ -1,0 +1,18 @@
+{
+  "name": "Custom Aircraft Template",
+  "description": "Template for custom aircraft lmao",
+  "dll_file": "CustomAircraftTemplate.dll",
+  "last_edit": 637622294931821380,
+  "pub_id": "",
+  "json_version": "",
+  "version": "",
+  "tagline": "",
+  "repository": "",
+  "is_public": false,
+  "unlisted": false,
+  "preview_image": "",
+  "web_preview_image": "",
+  "dependencies": null,
+  "mod_dependencies": null,
+  "ContentType": 1
+}
