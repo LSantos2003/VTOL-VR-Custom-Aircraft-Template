@@ -83,12 +83,10 @@
   <ItemGroup>
     <Compile Include="HelperScripts\AircraftHelper.cs" />
     <Compile Include="AircraftInfo.cs" />
-    <Compile Include="AircraftSetup.cs" />
     <Compile Include="CustomLandingGear.cs" />
     <Compile Include="HelperScripts\FileLoader.cs" />
     <Compile Include="Patches\InternalBayPatch.cs" />
     <Compile Include="Patches\LoadoutConfigPatch.cs" />
-    <Compile Include="Main.cs" />
     <Compile Include="Patches\PilotSelectPatch.cs" />
     <Compile Include="PlayerSpawnPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
