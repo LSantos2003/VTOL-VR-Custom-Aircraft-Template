@@ -22,7 +22,7 @@ namespace CustomAircraftTemplate
         private static string prefabName;
 
         public const string vehicleName = "F-117";
-        public static bool aircraftSelected = false;
+
         // This method is run once, when the Mod Loader is done initialising this game object
         public override void ModLoaded()
         {
@@ -33,13 +33,15 @@ namespace CustomAircraftTemplate
             instance = this;
 
 
-            string pathToBundle = Path.Combine(instance.ModFolder, "f117");
+            string pathToBundle = Path.Combine(instance.ModFolder, AircraftInfo.AircraftAssetbundleName);
             Debug.Log(pathToBundle);
-            aircraftPrefab = FileLoader.GetAssetBundleAsGameObject(pathToBundle, "Nighthawk_V4.prefab");
+            aircraftPrefab = FileLoader.GetAssetBundleAsGameObject(pathToBundle, AircraftInfo.AircraftPrefabName);
 
             Debug.Log("Got le" + aircraftPrefab.name);
-            StartCoroutine(AircraftHelper.LoadPlaneImage());
-            //Adding aircraft to screen
+
+            //Adds the custom plane to the main menu
+            StartCoroutine(AircraftHelper.CreatePlaneMenuItem());
+   
            
 
             //This is an event the VTOLAPI calls when the game is done loading a scene
