@@ -14,7 +14,6 @@ namespace CustomAircraftTemplate
     class AircraftHelper
     {
         public static GameObject SEAT_ADJUST_POSE_BOUNDS;
-        private static Texture2D MenuTexture;
 
         public static void FindSwitchBounds()
         {
@@ -187,7 +186,7 @@ namespace CustomAircraftTemplate
 
 
         //Loads a png into the game
-        public static IEnumerator CreatePlaneMenuItem()
+        public static IEnumerator LoadPlaneImage()
         {
             UnityWebRequest www = UnityWebRequestTexture.GetTexture(Path.Combine(Main.instance.ModFolder, Main.vehicleImageFileName));
             yield return www.SendWebRequest();
@@ -198,7 +197,7 @@ namespace CustomAircraftTemplate
             }
             else
             {
-                MenuTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
+                Main.aircraftTexture = ((DownloadHandlerTexture)www.downloadHandler).texture;
                 Debug.Log("Loaded plane image.");
             }
 
@@ -208,11 +207,11 @@ namespace CustomAircraftTemplate
 
             Debug.Log("Debug 2");
             PlayerVehicle newVehicle = ScriptableObject.CreateInstance<PlayerVehicle>();
-            newVehicle.vehicleName = AircraftInfo.AircraftName;
-            newVehicle.nickname = AircraftInfo.AircraftNickName;
-            newVehicle.description = AircraftInfo.AircraftDescription;
+            newVehicle.vehicleName = Main.vehicleName;
+            newVehicle.nickname = "Nighthawk";
+            newVehicle.description = "Stealth fighter/bomber";
             newVehicle.campaigns = PilotSaveManager.GetVehicle("F/A-26B").campaigns;
-            newVehicle.vehicleImage = MenuTexture;
+            newVehicle.vehicleImage = Main.aircraftTexture;
             vehicles.playerVehicles.Add(newVehicle);
 
             Debug.Log("Debug 3");

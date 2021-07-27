@@ -19,7 +19,7 @@ namespace CustomAircraftTemplate
         //Sets the temporary storage to if the vehicle is selected
         public static void Prefix()
         {
-            if (AircraftInfo.AircraftSelected)
+            if (Main.aircraftSelected)
             {
                 tempAircraftSelected = true;
             }
@@ -31,7 +31,7 @@ namespace CustomAircraftTemplate
         {
             if (tempAircraftSelected)
             {
-                AircraftInfo.AircraftSelected = true;
+                Main.aircraftSelected = true;
                 tempAircraftSelected = false;
             }
 
@@ -51,7 +51,7 @@ namespace CustomAircraftTemplate
 
                 Debug.Log("Nighthawk ran!");
                 //Bool that decides whether or not to run all the aircraft spawn code
-                AircraftInfo.AircraftSelected = true;
+                Main.aircraftSelected = true;
                 lockAircraftSelect = true;
 
                 __instance.SelectVehicle(PilotSaveManager.GetVehicle("F/A-26B"), null);
@@ -60,7 +60,7 @@ namespace CustomAircraftTemplate
 
             if (!lockAircraftSelect)
             {
-                AircraftInfo.AircraftSelected = false;
+                Main.aircraftSelected = false;
             }
 
             lockAircraftSelect = false;

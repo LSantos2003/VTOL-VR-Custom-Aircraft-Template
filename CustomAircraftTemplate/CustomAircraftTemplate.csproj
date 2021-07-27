@@ -81,16 +81,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HelperScripts\AircraftHelper.cs" />
-    <Compile Include="AircraftInfo.cs" />
+    <Compile Include="AircraftHelper.cs" />
+    <Compile Include="AircraftSetup.cs" />
     <Compile Include="CustomLandingGear.cs" />
-    <Compile Include="HelperScripts\FileLoader.cs" />
-    <Compile Include="Patches\InternalBayPatch.cs" />
-    <Compile Include="Patches\LoadoutConfigPatch.cs" />
-    <Compile Include="Patches\PilotSelectPatch.cs" />
+    <Compile Include="FileLoader.cs" />
+    <Compile Include="InternalBayPatch.cs" />
+    <Compile Include="LoadoutConfigPatch.cs" />
+    <Compile Include="Main.cs" />
+    <Compile Include="PilotSelectPatch.cs" />
     <Compile Include="PlayerSpawnPatch.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="HelperScripts\UnityMover.cs" />
+    <Compile Include="UnityMover.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

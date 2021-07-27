@@ -14,7 +14,7 @@ namespace CustomAircraftTemplate
     {
         public static void Postfix(LoadoutConfigurator __instance)
         {
-            if (!AircraftInfo.AircraftSelected) return;
+            if (!Main.aircraftSelected) return;
             __instance.AttachImmediate("fa26_tgp", 14);
             __instance.lockedHardpoints.Add(14);
             AircraftHelper.DisableMesh(AircraftHelper.GetChildWithName(VTOLAPI.GetPlayersVehicleGameObject(), "HP14 TGP"));
@@ -27,7 +27,7 @@ namespace CustomAircraftTemplate
         public static bool Prefix(LoadoutConfigurator __instance, HPEquippable equip)
         {
             
-            if (!AircraftInfo.AircraftSelected) return true;
+            if (!Main.aircraftSelected) return true;
 
             if (true) // fuck you c ; work on manners you ape
             {
