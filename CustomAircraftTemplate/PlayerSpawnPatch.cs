@@ -18,7 +18,7 @@ namespace CustomAircraftTemplate
         public static void Prefix(WeaponManager __instance)
         {
             FlightLogger.Log("Awake prefix ran in wm!");
-            if (VTOLAPI.GetPlayersVehicleGameObject() == __instance.gameObject && VTOLAPI.GetPlayersVehicleEnum() == VTOLVehicles.FA26B && Main.aircraftSelected)
+            if (VTOLAPI.GetPlayersVehicleGameObject() == __instance.gameObject && VTOLAPI.GetPlayersVehicleEnum() == VTOLVehicles.FA26B && AircraftInfo.AircraftSelected)
             {
 
           
@@ -104,7 +104,7 @@ namespace CustomAircraftTemplate
         {
 
             FlightLogger.Log("Start prefix ran in wm!");
-            if (VTOLAPI.GetPlayersVehicleGameObject() == __instance.gameObject && VTOLAPI.GetPlayersVehicleEnum() == VTOLVehicles.FA26B && Main.aircraftSelected)
+            if (VTOLAPI.GetPlayersVehicleGameObject() == __instance.gameObject && VTOLAPI.GetPlayersVehicleEnum() == VTOLVehicles.FA26B && AircraftInfo.AircraftSelected)
             {
 
 
