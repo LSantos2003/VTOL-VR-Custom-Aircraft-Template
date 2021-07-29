@@ -21,8 +21,6 @@ namespace CustomAircraftTemplate
         private static string fileName;
         private static string prefabName;
 
-        public const string vehicleName = "F-117";
-
         // This method is run once, when the Mod Loader is done initialising this game object
         public override void ModLoaded()
         {

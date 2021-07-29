@@ -37,7 +37,7 @@ namespace CustomAircraftTemplate
             if (gs == null)
                 return;
             List<customTransform> listCustomTraans = new List<customTransform>();
-            string fileLocation = Path.Combine(Main.instance.ModFolder, "NighthawkPositions.surg");
+            string fileLocation = Path.Combine(Main.instance.ModFolder, AircraftInfo.UnityMoverFileName);
             using (BinaryReader reader = new BinaryReader(File.Open(fileLocation, FileMode.Open)))
             {
 

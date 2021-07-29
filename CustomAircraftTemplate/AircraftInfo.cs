@@ -16,9 +16,11 @@ namespace CustomAircraftTemplate
 
         public const string PreviewPngFileName = "NighthawkVehicleImage.png";
 
-        public const string AircraftPrefabName = "f117";
-        public const string AircraftAssetbundleName = "Nighthawk_V4.prefab";
 
+        public const string AircraftAssetbundleName = "f117";
+        public const string AircraftPrefabName = "Nighthawk_V4.prefab";
+
+        public const string UnityMoverFileName = "NighthawkPositions.surg";
 
 
     }

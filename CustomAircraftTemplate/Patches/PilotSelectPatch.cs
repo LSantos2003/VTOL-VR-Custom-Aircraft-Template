@@ -46,7 +46,7 @@ namespace CustomAircraftTemplate
         public static bool Prefix(PilotSelectUI __instance, PlayerVehicle vehicle)
         {
             Debug.Log("Prefix ran!");
-            if (vehicle.vehicleName == Main.vehicleName)
+            if (vehicle.vehicleName == AircraftInfo.AircraftName)
             {
 
                 Debug.Log("Nighthawk ran!");
