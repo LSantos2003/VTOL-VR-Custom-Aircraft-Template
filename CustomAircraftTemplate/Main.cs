@@ -13,13 +13,13 @@ namespace CustomAircraftTemplate
     public class Main : VTOLMOD
     {
 
+        
         public static Main instance;
-        public static GameObject aircraftPrefab;
-        public static Texture2D aircraftTexture;
 
-        public const string vehicleImageFileName = "NighthawkVehicleImage.png";
-        private static string fileName;
-        private static string prefabName;
+        //Stores a prefab of the aircraft in order to spawn it in whenever you want
+        public static GameObject aircraftPrefab;
+
+
 
         // This method is run once, when the Mod Loader is done initialising this game object
         public override void ModLoaded()
@@ -35,7 +35,7 @@ namespace CustomAircraftTemplate
             Debug.Log(pathToBundle);
             aircraftPrefab = FileLoader.GetAssetBundleAsGameObject(pathToBundle, AircraftInfo.AircraftPrefabName);
 
-            Debug.Log("Got le" + aircraftPrefab.name);
+            Debug.Log("Got le " + aircraftPrefab.name);
 
             //Adds the custom plane to the main menu
             StartCoroutine(AircraftAPI.CreatePlaneMenuItem());

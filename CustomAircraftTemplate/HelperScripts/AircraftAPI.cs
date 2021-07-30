@@ -189,7 +189,7 @@ namespace CustomAircraftTemplate
         //Loads a png into the game
         public static IEnumerator CreatePlaneMenuItem()
         {
-            UnityWebRequest www = UnityWebRequestTexture.GetTexture(Path.Combine(Main.instance.ModFolder, Main.vehicleImageFileName));
+            UnityWebRequest www = UnityWebRequestTexture.GetTexture(Path.Combine(Main.instance.ModFolder, AircraftInfo.PreviewPngFileName));
             yield return www.SendWebRequest();
 
             if (www.responseCode != 200)
