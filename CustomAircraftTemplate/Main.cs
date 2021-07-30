@@ -25,7 +25,7 @@ namespace CustomAircraftTemplate
         public override void ModLoaded()
         {
          
-            HarmonyInstance harmonyInstance = HarmonyInstance.Create("C-137.CustomAircraft");
+            HarmonyInstance harmonyInstance = HarmonyInstance.Create(AircraftInfo.HarmonyId);
             harmonyInstance.PatchAll();
 
             instance = this;
