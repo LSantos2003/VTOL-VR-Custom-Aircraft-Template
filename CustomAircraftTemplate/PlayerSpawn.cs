@@ -11,7 +11,7 @@ namespace CustomAircraftTemplate
     [HarmonyPatch(typeof(WeaponManager), nameof(WeaponManager.Awake))]
     class PlayerSpawnAwakePatch
     {
-
+        //This is where you set the Transform values of your aircraft after it's spawned in
         private static Vector3 aircraftLocalPosition = new Vector3(0, 0.066f, 1.643f);
         private static Vector3 aircraftLocalEuler = Vector3.zero;
         private static Vector3 aircraftLocalScale= Vector3.one;
@@ -33,7 +33,7 @@ namespace CustomAircraftTemplate
 
              
 
-                FlightLogger.Log("About to add nighthawk");
+                FlightLogger.Log($"About to add {AircraftInfo.AircraftNickName}");
 
 
 
@@ -44,7 +44,7 @@ namespace CustomAircraftTemplate
                 aircraft.transform.localScale = aircraftLocalScale;
 
                 AircraftSetup.Fa26 = VTOLAPI.GetPlayersVehicleGameObject();
-                AircraftSetup.customAircraft = aircraft;
+                AircraftSetup.CustomAircraft = aircraft;
 
                 //Creates the canopy animation
                 AircraftSetup.CreateCanopyAnimation();

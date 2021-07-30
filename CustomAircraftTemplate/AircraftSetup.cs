@@ -10,7 +10,7 @@ namespace CustomAircraftTemplate
     class AircraftSetup
     {
         public static GameObject Fa26;
-        public static GameObject customAircraft;
+        public static GameObject CustomAircraft;
 
         public static void CreateCanopyAnimation()
         {
@@ -23,10 +23,10 @@ namespace CustomAircraftTemplate
             //Attach any handles for the canopy animation here!
             //canopyAnim.handleInteractables[0] = leftHandleInt;
             
-            canopyAnim.animator = AircraftAPI.GetChildWithName(customAircraft, "CanopyAnimator").GetComponent<Animator>();
-            canopyAnim.canopyTf = AircraftAPI.GetChildWithName(customAircraft, "CanopyTf").transform;
+            canopyAnim.animator = AircraftAPI.GetChildWithName(CustomAircraft, "CanopyAnimator").GetComponent<Animator>();
+            canopyAnim.canopyTf = AircraftAPI.GetChildWithName(CustomAircraft, "CanopyTf").transform;
 
-            Fa26.GetComponentInChildren<EjectionSeat>().canopyObject = AircraftAPI.GetChildWithName(customAircraft, "CanopyTf");
+            Fa26.GetComponentInChildren<EjectionSeat>().canopyObject = AircraftAPI.GetChildWithName(CustomAircraft, "CanopyTf");
 
             faCanopyAnim.SetActive(true);
             AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(Fa26, "Canopy"), wm);
@@ -45,24 +45,24 @@ namespace CustomAircraftTemplate
             AeroController controller = Fa26.GetComponentInChildren<AeroController>();
 
             //Aileron Example
-            AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(customAircraft, "LeftAileronTf").transform, new Vector3(0, 0, 1), 35, 70, 0, 1, 0, 0, 20, false, 0, 0);
-            AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(customAircraft, "RightAileronTf").transform, new Vector3(0, 0, -1), 35, 70, 0, 1, 0, 0, 20, false, 0, 0);
+            AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(CustomAircraft, "LeftAileronTf").transform, new Vector3(0, 0, 1), 35, 70, 0, 1, 0, 0, 20, false, 0, 0);
+            AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(CustomAircraft, "RightAileronTf").transform, new Vector3(0, 0, -1), 35, 70, 0, 1, 0, 0, 20, false, 0, 0);
 
-            AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(customAircraft, "LeftTailTf").transform, new Vector3(0, 1, 0), 25, 50, 0.6f, 0, 0.4f, 0, 20, false, 0, 0);
-            AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(customAircraft, "RightTailTf").transform, new Vector3(0, -1, 0), 25, 50, 0.6f, 0, -0.4f, 0, 20, false, 0, 0);
+            AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(CustomAircraft, "LeftTailTf").transform, new Vector3(0, 1, 0), 25, 50, 0.6f, 0, 0.4f, 0, 20, false, 0, 0);
+            AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(CustomAircraft, "RightTailTf").transform, new Vector3(0, -1, 0), 25, 50, 0.6f, 0, -0.4f, 0, 20, false, 0, 0);
         }
 
         public static void CreateLandingGear()
         {
             VRLever gearLever = AircraftAPI.FindInteractable("Landing Gear").gameObject.GetComponent<VRLever>();
-            CustomLandingGear gear = customAircraft.AddComponent<CustomLandingGear>();
-            gear.animToggle = AircraftAPI.GetChildWithName(customAircraft, "GearAnimator").GetComponent<AnimationToggle>();
+            CustomLandingGear gear = CustomAircraft.AddComponent<CustomLandingGear>();
+            gear.animToggle = AircraftAPI.GetChildWithName(CustomAircraft, "GearAnimator").GetComponent<AnimationToggle>();
             gear.gearLever = gearLever;
         }
         public static void SetUpHardpoints()
         {
-            GameObject hpRight = AircraftAPI.GetChildWithName(customAircraft, "HPRightTf");
-            GameObject hpLeft = AircraftAPI.GetChildWithName(customAircraft, "HPLeftTf");
+            GameObject hpRight = AircraftAPI.GetChildWithName(CustomAircraft, "HPRightTf");
+            GameObject hpLeft = AircraftAPI.GetChildWithName(CustomAircraft, "HPLeftTf");
 
             Transform hp12 = AircraftAPI.FindHardpoint(12).transform;
             Transform hp11 = AircraftAPI.FindHardpoint(11).transform;
@@ -81,7 +81,7 @@ namespace CustomAircraftTemplate
         public static void SetUpRefuelPort()
         {
             RefuelPort port = Fa26.GetComponentInChildren<RefuelPort>();
-            AnimationToggle animToggle = AircraftAPI.GetChildWithName(customAircraft, "RefuelPortAnimator").GetComponent<AnimationToggle>();
+            AnimationToggle animToggle = AircraftAPI.GetChildWithName(CustomAircraft, "RefuelPortAnimator").GetComponent<AnimationToggle>();
 
             port.OnOpen.AddListener(animToggle.Deploy);
             port.OnClose.AddListener(animToggle.Retract);
@@ -126,9 +126,9 @@ namespace CustomAircraftTemplate
             SuspensionWheelAnimator leftSus = AircraftAPI.GetChildWithName(Fa26, "LeftGear").GetComponentInChildren<SuspensionWheelAnimator>(true);
             SuspensionWheelAnimator rightSus = AircraftAPI.GetChildWithName(Fa26, "RightGear").GetComponentInChildren<SuspensionWheelAnimator>(true);
 
-            SuspensionWheelAnimator frontSusCustomAircraft = AircraftAPI.GetChildWithName(customAircraft, "FrontLegTf").GetComponentInChildren<SuspensionWheelAnimator>(true);
-            SuspensionWheelAnimator leftSusCustomAircraft = AircraftAPI.GetChildWithName(customAircraft, "LeftLeftTf").GetComponentInChildren<SuspensionWheelAnimator>(true);
-            SuspensionWheelAnimator rightSusCustomAircraft = AircraftAPI.GetChildWithName(customAircraft, "RightLegTf").GetComponentInChildren<SuspensionWheelAnimator>(true);
+            SuspensionWheelAnimator frontSusCustomAircraft = AircraftAPI.GetChildWithName(CustomAircraft, "FrontLegTf").GetComponentInChildren<SuspensionWheelAnimator>(true);
+            SuspensionWheelAnimator leftSusCustomAircraft = AircraftAPI.GetChildWithName(CustomAircraft, "LeftLeftTf").GetComponentInChildren<SuspensionWheelAnimator>(true);
+            SuspensionWheelAnimator rightSusCustomAircraft = AircraftAPI.GetChildWithName(CustomAircraft, "RightLegTf").GetComponentInChildren<SuspensionWheelAnimator>(true);
 
             frontSusCustomAircraft.suspension = frontSus.suspension;
             leftSusCustomAircraft.suspension = leftSus.suspension;
@@ -144,12 +144,12 @@ namespace CustomAircraftTemplate
 
         public static void SetUpEjectionSeat()
         {
-            Fa26.GetComponentInChildren<EjectionSeat>(true).canopyObject = AircraftAPI.GetChildWithName(customAircraft, "CanopyTf") ;
+            Fa26.GetComponentInChildren<EjectionSeat>(true).canopyObject = AircraftAPI.GetChildWithName(CustomAircraft, "CanopyTf") ;
         }
 
         public static void SetUpEOTS()
         {
-            OpticalTargeter targeter = customAircraft.GetComponentInChildren<OpticalTargeter>();
+            OpticalTargeter targeter = CustomAircraft.GetComponentInChildren<OpticalTargeter>();
 
             WeaponManager wm = Fa26.GetComponentInChildren<WeaponManager>(true); ;
             targeter.actor = Fa26.GetComponentInChildren<Actor>(true);
@@ -162,7 +162,7 @@ namespace CustomAircraftTemplate
 
         public static void SetUpMissileLaunchers()
         {
-            InternalWeaponBay[] bays = customAircraft.GetComponentsInChildren<InternalWeaponBay>(true);
+            InternalWeaponBay[] bays = CustomAircraft.GetComponentsInChildren<InternalWeaponBay>(true);
 
             foreach (MissileLauncher ml in Fa26.GetComponentsInChildren<MissileLauncher>(true))
             {
