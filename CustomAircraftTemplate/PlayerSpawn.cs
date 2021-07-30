@@ -9,7 +9,7 @@ using UnityEngine;
 namespace CustomAircraftTemplate
 {
     [HarmonyPatch(typeof(WeaponManager), nameof(WeaponManager.Awake))]
-    class PlayerSpawnPatch
+    class PlayerSpawnAwakePatch
     {
 
         private static Vector3 aircraftLocalPosition = new Vector3(0, 0.066f, 1.643f);

@@ -84,13 +84,13 @@
     <Compile Include="HelperScripts\AircraftAPI.cs" />
     <Compile Include="AircraftInfo.cs" />
     <Compile Include="AircraftSetup.cs" />
-    <Compile Include="CustomLandingGear.cs" />
+    <Compile Include="CustomClasses\CustomLandingGear.cs" />
     <Compile Include="HelperScripts\FileLoader.cs" />
     <Compile Include="Patches\InternalBayPatch.cs" />
     <Compile Include="Patches\LoadoutConfigPatch.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="Patches\PilotSelectPatch.cs" />
-    <Compile Include="PlayerSpawnPatch.cs" />
+    <Compile Include="PlayerSpawn.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="HelperScripts\UnityMover.cs" />
   </ItemGroup>
