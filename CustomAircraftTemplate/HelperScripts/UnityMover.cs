@@ -84,7 +84,7 @@ namespace CustomAircraftTemplate
                                 // ts.gameObject.GetComponent<MeshRenderer>().enabled = true;
 
                                 if (render == "dontrender")
-                                    AircraftHelper.DisableMesh(ts.gameObject, null, true);
+                                    AircraftAPI.DisableMesh(ts.gameObject, null, true);
                                 //ts.gameObject.GetComponent<MeshRenderer>().enabled = false;
 
                                 ts.localPosition = trans.positions;
@@ -100,13 +100,13 @@ namespace CustomAircraftTemplate
 
                                             Vector3 posesize = new Vector3();
                                             bool resize = false;
-                                            if (intact.poseBounds != null && AircraftHelper.SEAT_ADJUST_POSE_BOUNDS != null)
+                                            if (intact.poseBounds != null && AircraftAPI.SEAT_ADJUST_POSE_BOUNDS != null)
                                             {
                                                 if (intact.poseBounds.pose != GloveAnimation.Poses.Joystick || intact.poseBounds.pose != GloveAnimation.Poses.Throttle || intact.poseBounds.pose != GloveAnimation.Poses.JetThrottle)
                                                 {
                                                     resize = true;
                                                     posesize = intact.poseBounds.size;
-                                                    GameObject newBounds = Instantiate(AircraftHelper.SEAT_ADJUST_POSE_BOUNDS, gameObject.transform);
+                                                    GameObject newBounds = Instantiate(AircraftAPI.SEAT_ADJUST_POSE_BOUNDS, gameObject.transform);
                                                     newBounds.name = "new" + ts.parent.name;
                                                     newBounds.transform.position = intact.transform.parent.gameObject.transform.position;
                                                     newBounds.transform.eulerAngles = intact.transform.parent.transform.eulerAngles;

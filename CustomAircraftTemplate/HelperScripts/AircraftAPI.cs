@@ -11,7 +11,7 @@ using UnityEngine.Networking;
 
 namespace CustomAircraftTemplate
 {
-    class AircraftHelper
+    class AircraftAPI
     {
         public static GameObject SEAT_ADJUST_POSE_BOUNDS;
         private static Texture2D MenuTexture;

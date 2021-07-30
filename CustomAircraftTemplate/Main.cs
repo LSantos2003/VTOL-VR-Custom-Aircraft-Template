@@ -38,7 +38,7 @@ namespace CustomAircraftTemplate
             Debug.Log("Got le" + aircraftPrefab.name);
 
             //Adds the custom plane to the main menu
-            StartCoroutine(AircraftHelper.CreatePlaneMenuItem());
+            StartCoroutine(AircraftAPI.CreatePlaneMenuItem());
    
            
 

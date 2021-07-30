@@ -21,9 +21,9 @@ namespace CustomAircraftTemplate
             if (VTOLAPI.GetPlayersVehicleGameObject() == __instance.gameObject && VTOLAPI.GetPlayersVehicleEnum() == VTOLVehicles.FA26B && AircraftInfo.AircraftSelected)
             {
 
-          
 
-                AircraftHelper.FindSwitchBounds();
+
+                AircraftAPI.FindSwitchBounds();
 
                 
                 UnityMover mover = __instance.gameObject.AddComponent<UnityMover>();
@@ -74,6 +74,7 @@ namespace CustomAircraftTemplate
                 AircraftSetup.SetUpHud();
 
                 AircraftSetup.SetUpMissileLaunchers();
+
                 //Assigns the correct variables for the EOTS
                 //AircraftSetup.SetUpEOTS();
 
@@ -86,7 +87,7 @@ namespace CustomAircraftTemplate
                 }
 
                 FlightLogger.Log("Disabling mesh");
-                AircraftHelper.Disable26Mesh();
+                AircraftAPI.Disable26Mesh();
                
 
 
