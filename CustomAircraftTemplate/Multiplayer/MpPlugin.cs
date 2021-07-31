@@ -94,13 +94,13 @@ namespace CustomAircraftTemplate
 
         public bool CheckPlaneSelected()
         {
-            /*if (PlayerManager.LoadedCustomPlaneString == AircraftInfo.AircraftName && PlayerManager.PlayerIsCustomPlane)
+            if (PlayerManager.LoadedCustomPlaneString == AircraftInfo.AircraftName && PlayerManager.PlayerIsCustomPlane)
             {
                 AircraftInfo.AircraftSelected = true;
                 return true;
             }
 
-            AircraftInfo.AircraftSelected = false;*/
+            AircraftInfo.AircraftSelected = false;
             return false;
        
         }

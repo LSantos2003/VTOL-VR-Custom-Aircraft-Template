@@ -22,12 +22,12 @@ namespace CustomAircraftTemplate
 			aircraft.transform.localEulerAngles = aircraftLocalEuler;
 			aircraft.transform.localScale = aircraftLocalScale;
 
+			AIPilot aiPilot = aiObject.GetComponentInChildren<AIPilot>();
+			GearAnimator gearAnim = aiPilot.gearAnimator;
 
-			GearAnimator gearAnim = aiObject.GetComponentInChildren<GearAnimator>(true);
 			AnimationToggle animToggle = AircraftAPI.GetChildWithName(aircraft, "GearAnimator").GetComponent<AnimationToggle>();
-			gearAnim.OnOpen = new UnityEvent();
-			gearAnim.OnOpen.AddListener(new UnityAction(animToggle.Deploy));
-			gearAnim.OnClose.AddListener(new UnityAction(animToggle.Retract));
+			gearAnim.OnOpen.AddListener(new UnityAction(animToggle.Retract));
+			gearAnim.OnClose.AddListener(new UnityAction(animToggle.Deploy));
 			Disable26MeshAi(aiObject);
 		}
 

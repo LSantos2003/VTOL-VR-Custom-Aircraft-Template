@@ -49,6 +49,7 @@ namespace CustomAircraftTemplate
             VTOLAPI.SceneLoaded += SceneLoaded;
             base.ModLoaded();
 
+            this.checkMPloaded();
 
 
         }

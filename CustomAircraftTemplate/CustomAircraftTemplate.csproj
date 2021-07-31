@@ -70,6 +70,9 @@
     <Reference Include="UnityEngine.IMGUIModule">
       <HintPath>..\..\..\..\VTOLVR_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.PhysicsModule">
+      <HintPath>..\..\..\..\VTOLVR_Data\Managed\UnityEngine.PhysicsModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>..\..\..\..\VTOLVR_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>

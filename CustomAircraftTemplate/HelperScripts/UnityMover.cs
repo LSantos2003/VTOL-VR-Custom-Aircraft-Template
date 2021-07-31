@@ -108,10 +108,15 @@ namespace CustomAircraftTemplate
                                                     posesize = intact.poseBounds.size;
                                                     GameObject newBounds = Instantiate(AircraftAPI.SEAT_ADJUST_POSE_BOUNDS, gameObject.transform);
                                                     newBounds.name = "new" + ts.parent.name;
-                                                    newBounds.transform.position = intact.transform.parent.gameObject.transform.position;
+                                                    newBounds.transform.position = intact.transform.gameObject.transform.position;
                                                     newBounds.transform.eulerAngles = intact.transform.parent.transform.eulerAngles;
                                                     intact.poseBounds = newBounds.GetComponent<PoseBounds>(); //Assigns bounds for switch
                                                     if (resize) intact.poseBounds.size = posesize;
+                                                    
+                                       
+
+
+
                                                 }
 
 
