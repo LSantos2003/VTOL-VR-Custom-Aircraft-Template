@@ -29,9 +29,16 @@ namespace CustomAircraftTemplate
         //Changes the aircraftselected variable back to true if it was initially selected
         public static void Postfix()
         {
+
             if (tempAircraftSelected)
             {
                 AircraftInfo.AircraftSelected = true;
+                Main.instance.checkMPloaded();
+                if (MpPlugin.MPActive)
+                {
+                    Main.instance.plugin.SetCustomPlaneMP();
+                }
+
                 tempAircraftSelected = false;
             }
 
@@ -52,6 +59,12 @@ namespace CustomAircraftTemplate
                 Debug.Log("Nighthawk ran!");
                 //Bool that decides whether or not to run all the aircraft spawn code
                 AircraftInfo.AircraftSelected = true;
+                Main.instance.checkMPloaded();
+                if (MpPlugin.MPActive)
+                {
+                    Main.instance.plugin.SetCustomPlaneMP();
+                }
+
                 lockAircraftSelect = true;
 
                 __instance.SelectVehicle(PilotSaveManager.GetVehicle("F/A-26B"), null);

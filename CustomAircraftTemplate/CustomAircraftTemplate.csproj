@@ -43,6 +43,10 @@
     <Reference Include="ModLoader">
       <HintPath>..\Dependencies\ModLoader.dll</HintPath>
     </Reference>
+    <Reference Include="Multiplayer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\mods\Multiplayer\Multiplayer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -81,11 +85,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Multiplayer\AiSetup.cs" />
     <Compile Include="HelperScripts\AircraftAPI.cs" />
     <Compile Include="AircraftInfo.cs" />
     <Compile Include="AircraftSetup.cs" />
     <Compile Include="CustomClasses\CustomLandingGear.cs" />
     <Compile Include="HelperScripts\FileLoader.cs" />
+    <Compile Include="Multiplayer\MpPlugin.cs" />
     <Compile Include="Patches\InternalBayPatch.cs" />
     <Compile Include="Patches\LoadoutConfigPatch.cs" />
     <Compile Include="Main.cs" />

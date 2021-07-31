@@ -17,7 +17,7 @@ namespace CustomAircraftTemplate
             if (!AircraftInfo.AircraftSelected) return;
             __instance.AttachImmediate("fa26_tgp", 14);
             __instance.lockedHardpoints.Add(14);
-            AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(VTOLAPI.GetPlayersVehicleGameObject(), "HP14 TGP"));
+            AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(Main.playerGameObject, "HP14 TGP"));
 
         }
     }

@@ -28,7 +28,7 @@ namespace CustomAircraftTemplate
         public const string UnityMoverFileName = "NighthawkPositions.surg";
 
         //Name of the prefab of your aircraft from the assetbundle
-        public const string AircraftPrefabName = "Nighthawk_V4.prefab";
+        public const string AircraftPrefabName = "Nighthawk_V5.prefab";
 
 
 

@@ -18,7 +18,7 @@ namespace CustomAircraftTemplate
 
         public static void FindSwitchBounds()
         {
-            SEAT_ADJUST_POSE_BOUNDS = GetChildWithName(VTOLAPI.GetPlayersVehicleGameObject(), ("MasterArmPoseBounds"));
+            SEAT_ADJUST_POSE_BOUNDS = GetChildWithName(Main.playerGameObject, ("MasterArmPoseBounds"));
             Debug.Log("pose bound found: " + SEAT_ADJUST_POSE_BOUNDS);
 
 
@@ -26,7 +26,7 @@ namespace CustomAircraftTemplate
 
         public static VRInteractable FindInteractable(string interactableName)
         {
-            foreach(VRInteractable interactble in VTOLAPI.GetPlayersVehicleGameObject().GetComponentsInChildren<VRInteractable>(true))
+            foreach(VRInteractable interactble in Main.playerGameObject.GetComponentsInChildren<VRInteractable>(true))
             {
                 if(interactble.interactableName == interactableName)
                 {
@@ -40,7 +40,7 @@ namespace CustomAircraftTemplate
 
         public static HardpointVehiclePart FindHardpoint(int idx)
         {
-            foreach (HardpointVehiclePart vp in VTOLAPI.GetPlayersVehicleGameObject().GetComponentsInChildren<HardpointVehiclePart>(true))
+            foreach (HardpointVehiclePart vp in Main.playerGameObject.GetComponentsInChildren<HardpointVehiclePart>(true))
             {
                 if (vp.hpIdx == idx)
                 {
@@ -109,7 +109,7 @@ namespace CustomAircraftTemplate
 
         public static void Disable26Mesh()
         {
-            GameObject go = VTOLAPI.GetPlayersVehicleGameObject();
+            GameObject go = Main.playerGameObject;
             WeaponManager wm = go.GetComponentInChildren<WeaponManager>(true);
             DisableMesh(GetChildWithName(go, "body"), wm);
             DisableMesh(GetChildWithName(go, "wingRightPart"), wm);

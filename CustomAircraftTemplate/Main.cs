@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace CustomAircraftTemplate
 {
@@ -19,6 +20,8 @@ namespace CustomAircraftTemplate
         //Stores a prefab of the aircraft in order to spawn it in whenever you want
         public static GameObject aircraftPrefab;
 
+        public static GameObject playerGameObject;
+        public MpPlugin plugin = null;
 
 
         // This method is run once, when the Mod Loader is done initialising this game object
@@ -50,8 +53,24 @@ namespace CustomAircraftTemplate
 
         }
 
+        public void checkMPloaded()
+        {
+            Debug.Log("checking Multiplayer is installed");
+            List<Mod> list = new List<Mod>();
+            list = VTOLAPI.GetUsersMods();
+            foreach (Mod mod in list)
+            {
+                bool flag = mod.isLoaded && mod.name.Contains("ultiplayer");
+                if (flag)
+                {
+                    this.plugin = new MpPlugin();
+                    this.plugin.MPlock();
+                }
+            }
+        }
 
-      
+
+
         //This method is called every frame by Unity. Here you'll probably put most of your code
         void Update()
         {
@@ -73,6 +92,7 @@ namespace CustomAircraftTemplate
             {
                 case VTOLScenes.ReadyRoom:
                     //Add your ready room code here
+                    this.checkMPloaded();
                     break;
                 case VTOLScenes.LoadingScene:
                     //Add your loading scene code here
