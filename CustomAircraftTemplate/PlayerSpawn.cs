@@ -14,7 +14,7 @@ namespace CustomAircraftTemplate
 
         private static Vector3 aircraftLocalPosition = new Vector3(0, 0.869f, 1.707f);
         private static Vector3 aircraftLocalEuler = new Vector3(0, 90, 0);
-        private static Vector3 aircraftLocalScale= new Vector3(5, 5, 5);
+        private static Vector3 aircraftLocalScale= new Vector3(5f, 5f, 5f);
        
 
         public static void Prefix(WeaponManager __instance)
@@ -56,26 +56,27 @@ namespace CustomAircraftTemplate
                 AircraftSetup.Fa26 = Main.playerGameObject;
                 AircraftSetup.customAircraft = aircraft;
 
-                //Creates the canopy animation
-                //AircraftSetup.CreateCanopyAnimation();
+                //Creates the canopy animation and assigns the canopyobject to the ejection seat
+                AircraftSetup.CreateCanopyAnimation();
+
 
                 //Creates the control surfaces
-                //AircraftSetup.CreateControlSurfaces();
+                AircraftSetup.CreateControlSurfaces();
 
                 //Creates the custom landing gear
                 AircraftSetup.CreateLandingGear();
 
                 //Moves the hardpoints in the correct location
-                //AircraftSetup.SetUpHardpoints();
+                AircraftSetup.SetUpHardpoints();
 
                 //Attaches the refuel port animation to the refuel port class
-                //AircraftSetup.SetUpRefuelPort();
+                AircraftSetup.SetUpRefuelPort();
 
                 //Makes tgp invisible everytime it's equipped
-                //AircraftSetup.SetUpInvisTGP();
+                AircraftSetup.SetUpInvisTGP();
 
                 //Assigns the suspension components to the custom aircraft landing gear
-                //AircraftSetup.SetUpWheels();
+                AircraftSetup.SetUpWheels();
 
                 //Changes characteristics of the engines
                 AircraftSetup.SetUpEngines();
@@ -83,11 +84,14 @@ namespace CustomAircraftTemplate
                 //Changes depth and scale of the hud to make it legible
                 AircraftSetup.SetUpHud();
 
-                //AircraftSetup.SetUpMissileLaunchers();
+                AircraftSetup.SetUpMissileLaunchers();
 
+                //Disables the Fa26's wingflex so nav lights don't get screwy
+                AircraftSetup.DisableWingFlex();
                 //Assigns the correct variables for the EOTS
                 //AircraftSetup.SetUpEOTS();
-                /*
+                
+
                 List<InternalWeaponBay> bays = new List<InternalWeaponBay>();
                 foreach (InternalWeaponBay bay in aircraft.GetComponentsInChildren<InternalWeaponBay>(true))
                 {
@@ -95,7 +99,7 @@ namespace CustomAircraftTemplate
                     bays.Add(bay);
 
                 }
-                */
+                
                 FlightLogger.Log("Disabling mesh");
                 AircraftAPI.Disable26Mesh();
                
