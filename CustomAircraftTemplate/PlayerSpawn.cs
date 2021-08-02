@@ -123,7 +123,7 @@ namespace CustomAircraftTemplate
             {
 
 
-                //AircraftSetup.SetUpMissileLaunchers();
+                AircraftSetup.SetUpMissileLaunchers();
 
             }
         }
