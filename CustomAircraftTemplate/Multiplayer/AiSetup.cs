@@ -16,6 +16,8 @@ namespace CustomAircraftTemplate
 
         public static void CreateAi(GameObject aiObject)
         {
+			Disable26MeshAi(aiObject);
+
 			GameObject aircraft = Instantiate<GameObject>(Main.aircraftPrefab);
 			aircraft.transform.SetParent(aiObject.transform);
 			aircraft.transform.localPosition = aircraftLocalPosition;
@@ -28,33 +30,46 @@ namespace CustomAircraftTemplate
 			AnimationToggle animToggle = AircraftAPI.GetChildWithName(aircraft, "GearAnimator").GetComponent<AnimationToggle>();
 			gearAnim.OnOpen.AddListener(new UnityAction(animToggle.Retract));
 			gearAnim.OnClose.AddListener(new UnityAction(animToggle.Deploy));
-			Disable26MeshAi(aiObject);
+
+			CreateControlSurfaces(aircraft, aiObject);
+			SetUpRCS(aiObject);
 		}
 
 		public static void Disable26MeshAi(GameObject go)
 		{
 			WeaponManager componentInChildren = go.GetComponentInChildren<WeaponManager>(true);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "body"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "body (LOD1)"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "FuelPort"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "intakeLeft"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "intakeRight"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "elevonLeftPart"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "elevonRightPart"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "verticalStabLeft"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "verticalStabRight"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "wingLeftPart"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "wingRightPart"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "combinedEngine"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "LandingGear"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "airbrakeParent"), componentInChildren);
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "HP14 TGP"));
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "cockpitFrame.002 (LOD1)"));
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "canopy"));
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "windshield"));
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "windshield.002 (LOD1)"));
-			AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(go, "HP14 TGP"));
+			AircraftAPI.DisableMesh(go, componentInChildren);
+			
 		}
+
+		public static void CreateControlSurfaces(GameObject customAircraft, GameObject aiAircraft)
+		{
+
+			AeroController controller = aiAircraft.GetComponentInChildren<AeroController>();
+
+			//Aileron Example
+			AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(customAircraft, "l_Wing_CS_1").transform, new Vector3(0, 0, 1), 35, 70, 0, 1, 0, 0, 20, false, 0, 0);
+			AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(customAircraft, "r_Wing_CS_1").transform, new Vector3(0, 0, -1), 35, 70, 0, 1, 0, 0, 20, false, 0, 0);
+
+			AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(customAircraft, "l_Rudder_Tip").transform, new Vector3(0, 1, 0), 25, 50, 0.6f, 0, -0.4f, 0, 20, false, 0, 0);
+			AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(customAircraft, "r_Rudder_Tip").transform, new Vector3(0, -1, 0), 25, 50, 0.6f, 0, 0.4f, 0, 20, false, 0, 0);
+
+			AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(customAircraft, "l_Wing_CS_2").transform, new Vector3(1, 0, 0), 35, 40, 0f, 0, 0f, 0, -1, true, 0, 1);
+			AircraftAPI.createControlSurface(controller, AircraftAPI.GetChildWithName(customAircraft, "r_Wing_CS_2").transform, new Vector3(-1, 0, 0), 35, 40, 0f, 0, 0f, 0, -1, true, 0, 1);
+		}
+
+		public static void SetUpRCS(GameObject aiAircraft)
+		{
+			RadarCrossSection rcs = aiAircraft.GetComponent<RadarCrossSection>();
+			rcs.size = 7.381652f;
+			rcs.overrideMultiplier = 0.5f;
+
+			foreach (HPEquippable hp in aiAircraft.GetComponentsInChildren<HPEquippable>(true))
+			{
+				hp.rcsMasked = true;
+			}
+		}
+
 
 	}
 

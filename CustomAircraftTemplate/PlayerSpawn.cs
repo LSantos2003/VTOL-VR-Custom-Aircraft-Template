@@ -25,7 +25,7 @@ namespace CustomAircraftTemplate
             if (MpPlugin.MPActive)
             {
                 mpCheck = Main.instance.plugin.CheckPlaneSelected();
-                
+
             }
 
             if (mpCheck && __instance.gameObject.GetComponentInChildren<PlayerFlightLogger>() && VTOLAPI.GetPlayersVehicleEnum() == VTOLVehicles.FA26B && AircraftInfo.AircraftSelected)
@@ -90,8 +90,11 @@ namespace CustomAircraftTemplate
                 AircraftSetup.DisableWingFlex();
                 //Assigns the correct variables for the EOTS
                 //AircraftSetup.SetUpEOTS();
-                
 
+                //Fixes the weird shifting nav map bug. Must be called after unity mover
+                AircraftSetup.ScaleNavMap();
+
+                
                 List<InternalWeaponBay> bays = new List<InternalWeaponBay>();
                 foreach (InternalWeaponBay bay in aircraft.GetComponentsInChildren<InternalWeaponBay>(true))
                 {
@@ -99,12 +102,24 @@ namespace CustomAircraftTemplate
                     bays.Add(bay);
 
                 }
-                
+
+                AircraftAPI.FindInteractable("Toggle Altitude Mode").OnInteract.AddListener(logRCS);
+
+
+
                 FlightLogger.Log("Disabling mesh");
                 AircraftAPI.Disable26Mesh();
                
 
 
+            }
+        }
+
+        public static void logRCS()
+        {
+            foreach(HPEquippable hp in Main.playerGameObject.GetComponentsInChildren<HPEquippable>(true))
+            {
+                FlightLogger.Log($"RCS of idx {hp.hardpointIdx}: {hp.GetRadarCrossSection()}");
             }
         }
     }
@@ -122,8 +137,14 @@ namespace CustomAircraftTemplate
             if (__instance.gameObject.GetComponentInChildren<PlayerFlightLogger>() && VTOLAPI.GetPlayersVehicleEnum() == VTOLVehicles.FA26B && AircraftInfo.AircraftSelected)
             {
 
-
+                //Makes missiles compatabile with the internal bays
                 AircraftSetup.SetUpMissileLaunchers();
+
+                //Reduces the rcs of the fa-26 and intiially sets the hard point rcs to 0
+                AircraftSetup.SetUpRCS();
+
+                //Folds the wings down on spawn
+                AircraftSetup.SetWingFold();
 
             }
         }

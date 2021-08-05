@@ -20,7 +20,7 @@ namespace CustomAircraftTemplate
         //Info about your aircraft
         public const string AircraftName = "F-117";
         public const string AircraftNickName = "Nighthawk";
-        public const string AircraftDescription = "Stealth bomber";
+        public const string AircraftDescription = "\"Nighthawk\" A stealthy attack/bomber aircraft with two internal weapon bays. Using an experimental stealth coating, it has a lower rcs than that of the F-45A";
 
         //Names of the various files you need to put in your builds folder
         public const string PreviewPngFileName = "NighthawkVehicleImage.png";

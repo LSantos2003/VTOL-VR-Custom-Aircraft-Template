@@ -56,7 +56,7 @@ namespace CustomAircraftTemplate
 
         public void checkMPloaded()
         {
-            Debug.Log("checking Multiplayer is installed");
+            FlightLogger.Log("checking Multiplayer is installed");
             List<Mod> list = new List<Mod>();
             list = VTOLAPI.GetUsersMods();
             foreach (Mod mod in list)
@@ -75,6 +75,7 @@ namespace CustomAircraftTemplate
         //This method is called every frame by Unity. Here you'll probably put most of your code
         void Update()
         {
+            
         }
 
         //This method is like update but it's framerate independent. This means it gets called at a set time interval instead of every frame. This is useful for physics calculations

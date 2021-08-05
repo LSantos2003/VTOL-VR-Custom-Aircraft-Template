@@ -15,12 +15,12 @@ namespace CustomAircraftTemplate
 
         public void MPlock()
         {
-            Debug.Log($"Found Multiplayer set {AircraftInfo.AircraftName} mp");
+            FlightLogger.Log($"Found Multiplayer set {AircraftInfo.AircraftName} mp");
             if (MPActive)
                 return;
             MPActive = true;
-            PlayerManager.PlayerIsCustomPlane = true;
-            PlayerManager.LoadedCustomPlaneString = AircraftInfo.AircraftName;
+            //PlayerManager.PlayerIsCustomPlane = true;
+            //PlayerManager.LoadedCustomPlaneString = AircraftInfo.AircraftName;
 
             PlayerManager.onSpawnLocalPlayer = (UnityAction<PlayerManager.CustomPlaneDef>)Delegate.Combine(PlayerManager.onSpawnLocalPlayer, new UnityAction<PlayerManager.CustomPlaneDef>(MPRespawnHook));
             PlayerManager.onSpawnClient = (UnityAction<PlayerManager.CustomPlaneDef>)Delegate.Combine(PlayerManager.onSpawnClient, new UnityAction<PlayerManager.CustomPlaneDef>(ClientAircraftSpawned));
@@ -91,6 +91,16 @@ namespace CustomAircraftTemplate
             PlayerManager.SetCustomPlane(AircraftInfo.AircraftName);
             
         }
+
+        public void UnSetCustomPlaneMP()
+        {
+            if (PlayerManager.LoadedCustomPlaneString != AircraftInfo.AircraftName) return;
+            
+            PlayerManager.PlayerIsCustomPlane = false;
+            PlayerManager.SetCustomPlane("none");
+
+        }
+
 
         public bool CheckPlaneSelected()
         {

@@ -14,7 +14,17 @@ namespace CustomAircraftTemplate
     {
         public static void Postfix(LoadoutConfigurator __instance)
         {
-            if (!AircraftInfo.AircraftSelected) return;
+            bool mpCheck = true;
+
+            if (MpPlugin.MPActive)
+            {
+                mpCheck = Main.instance.plugin.CheckPlaneSelected();
+
+            }
+
+            if (!AircraftInfo.AircraftSelected || VTOLAPI.GetPlayersVehicleEnum() != VTOLVehicles.FA26B) return;
+
+
             __instance.AttachImmediate("fa26_tgp", 14);
             __instance.lockedHardpoints.Add(14);
             AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(Main.playerGameObject, "HP14 TGP"));
@@ -43,7 +53,7 @@ namespace CustomAircraftTemplate
                 allowedhardpointbyweapon.Add("fa26_agm161", "");
                 allowedhardpointbyweapon.Add("fa26_aim9x2", "");
                 allowedhardpointbyweapon.Add("fa26_aim9x3", "");
-                allowedhardpointbyweapon.Add("fa26_cagm-6", "");
+                allowedhardpointbyweapon.Add("fa26_cagm-6", "11, 12");
                 allowedhardpointbyweapon.Add("fa26_cbu97x1", "11, 12");
                 allowedhardpointbyweapon.Add("fa26_droptank", "");
                 allowedhardpointbyweapon.Add("fa26_droptankXL", "");

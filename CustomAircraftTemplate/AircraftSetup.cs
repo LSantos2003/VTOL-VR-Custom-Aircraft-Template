@@ -115,6 +115,7 @@ namespace CustomAircraftTemplate
             {
                 engine.autoAB = false;
                 engine.autoABThreshold = 1f;
+                engine.maxThrust = 100f;
             }
 
             VRThrottle throttle = Fa26.GetComponentInChildren<VRThrottle>(true);
@@ -167,6 +168,8 @@ namespace CustomAircraftTemplate
         {
             InternalWeaponBay[] bays = customAircraft.GetComponentsInChildren<InternalWeaponBay>(true);
 
+            if (bays == null) return;
+
             foreach (MissileLauncher ml in Fa26.GetComponentsInChildren<MissileLauncher>(true))
             {
                 FlightLogger.Log("Found " + ml.missilePrefab.name);
@@ -192,6 +195,46 @@ namespace CustomAircraftTemplate
                 flex.flexFactor = 0;
             }
         }
+        
+        public static void ScaleNavMap()
+        {
+            Transform mfd1 = AircraftAPI.GetChildWithName(Fa26, "MFD1").transform;
+            Transform mapParent = AircraftAPI.GetChildWithName(Fa26, "MapParent").transform;
+            Transform mapDisplay = AircraftAPI.GetChildWithName(Fa26, "MapDisplay").transform;
+            Transform mapTest = AircraftAPI.GetChildWithName(Fa26, "MapTest").transform;
+            Transform mapTransform = AircraftAPI.GetChildWithName(Fa26, "MapTransform").transform;
 
+            float small = mfd1.transform.localScale.x / 99.73274f;
+            float big = 99.73274f / mfd1.transform.localScale.x;
+
+            Vector3 smallScale = Vector3.one * small;
+            Vector3 bigScale = Vector3.one * big;
+
+            mapParent.transform.localScale = smallScale;
+            mapDisplay.transform.localScale = bigScale;
+            mapTest.transform.localScale = bigScale;
+            mapTransform.transform.localScale = bigScale;
+
+        }
+
+        public static void SetUpRCS()
+        {
+            RadarCrossSection rcs = Fa26.GetComponent<RadarCrossSection>();
+            rcs.size = 7.381652f;
+            rcs.overrideMultiplier = 0.5f;
+
+            foreach(HPEquippable hp in Fa26.GetComponentsInChildren<HPEquippable>(true))
+            {
+                hp.rcsMasked = true;
+            }
+        }
+
+        public static void SetWingFold()
+        {
+            Fa26.GetComponentInChildren<VehicleMaster>(true).SetWingFoldImmediate(false);
+            Fa26.GetComponentInChildren<FlightWarnings>(true).RemoveCommonWarning(FlightWarnings.CommonWarnings.WingFold);
+            
+
+        }
     }
 }
