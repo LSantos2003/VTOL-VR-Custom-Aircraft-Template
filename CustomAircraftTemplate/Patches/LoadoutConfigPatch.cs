@@ -1,5 +1,6 @@
 ﻿using Harmony;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,14 @@ using UnityEngine;
 
 namespace CustomAircraftTemplate
 {
-
     [HarmonyPatch(typeof(LoadoutConfigurator), "Initialize")]
+    public static class LoadoutConfig
+    {
+
+
+
+    }
+        [HarmonyPatch(typeof(LoadoutConfigurator), "Initialize")]
     public static class LoadoutConfigStartPatch
     {
         public static bool Prefix(LoadoutConfigurator __instance)
@@ -59,20 +66,43 @@ namespace CustomAircraftTemplate
 
             if (!AircraftInfo.AircraftSelected || VTOLAPI.GetPlayersVehicleEnum() != VTOLVehicles.FA26B) return;
 
+            //Detaches the weapons from the aircraft
+            Main.instance.StartCoroutine(DetachRoutine(__instance));
 
             __instance.AttachImmediate("fa26_tgp", 14);
             __instance.lockedHardpoints.Add(14);
             AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(Main.playerGameObject, "HP14 TGP"));
 
+
         }
+
+        //Coroutine that detaches all the weapons
+        public static IEnumerator DetachRoutine(LoadoutConfigurator config)
+        {
+            yield return new WaitForSeconds(1);
+
+            Debug.Log("Hardpoint count: " + config.wm.hardpointTransforms.Length);
+            for (int i = 0; i < config.wm.hardpointTransforms.Length; i++)
+            {
+                if(i == 11 || i == 12 || i == 14)
+                {
+                    continue;
+                }
+                config.DetachImmediate(i);
+            }
+        }
+
     }
         [HarmonyPatch(typeof(LoadoutConfigurator), "EquipCompatibilityMask")]
     public static class EquipComaptibilityPatch
     {
         public static bool Prefix(LoadoutConfigurator __instance, HPEquippable equip)
         {
-            
+
+
             if (!AircraftInfo.AircraftSelected) return true;
+
+
 
             if (true) // fuck you c ; work on manners you ape
             {
