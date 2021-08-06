@@ -11,16 +11,26 @@ namespace CustomAircraftTemplate
     [HarmonyPatch(typeof(WeaponManager), nameof(WeaponManager.Awake))]
     class PlayerSpawnAwakePatch
     {
-        //This is where you set the Transform values of your aircraft after it's spawned in
-        private static Vector3 aircraftLocalPosition = new Vector3(0, 0.066f, 1.643f);
-        private static Vector3 aircraftLocalEuler = Vector3.zero;
-        private static Vector3 aircraftLocalScale= Vector3.one;
+
+        private static Vector3 aircraftLocalPosition = new Vector3(0, 0.869f, 1.707f);
+        private static Vector3 aircraftLocalEuler = new Vector3(0, 90, 0);
+        private static Vector3 aircraftLocalScale= new Vector3(5f, 5f, 5f);
+       
+
         public static void Prefix(WeaponManager __instance)
         {
             FlightLogger.Log("Awake prefix ran in wm!");
-            if (VTOLAPI.GetPlayersVehicleGameObject() == __instance.gameObject && VTOLAPI.GetPlayersVehicleEnum() == VTOLVehicles.FA26B && AircraftInfo.AircraftSelected)
-            {
+            bool mpCheck = true;
 
+            if (MpPlugin.MPActive)
+            {
+                mpCheck = Main.instance.plugin.CheckPlaneSelected();
+
+            }
+
+            if (mpCheck && __instance.gameObject.GetComponentInChildren<PlayerFlightLogger>() && VTOLAPI.GetPlayersVehicleEnum() == VTOLVehicles.FA26B && AircraftInfo.AircraftSelected)
+            {
+                Main.playerGameObject = __instance.gameObject;
 
 
                 AircraftAPI.FindSwitchBounds();
@@ -28,26 +38,28 @@ namespace CustomAircraftTemplate
                 
                 UnityMover mover = __instance.gameObject.AddComponent<UnityMover>();
                 mover.gs = __instance.gameObject;
+                mover.FileName = AircraftInfo.UnityMoverFileName;
                 mover.load(true);
                
 
              
 
-                FlightLogger.Log($"About to add {AircraftInfo.AircraftNickName}");
+                FlightLogger.Log("About to add nighthawk");
 
 
 
                 GameObject aircraft = GameObject.Instantiate(Main.aircraftPrefab);
-                aircraft.transform.SetParent(VTOLAPI.GetPlayersVehicleGameObject().transform);
+                aircraft.transform.SetParent(Main.playerGameObject.transform);
                 aircraft.transform.localPosition = aircraftLocalPosition;
                 aircraft.transform.localEulerAngles = aircraftLocalEuler;
                 aircraft.transform.localScale = aircraftLocalScale;
 
-                AircraftSetup.Fa26 = VTOLAPI.GetPlayersVehicleGameObject();
-                AircraftSetup.CustomAircraft = aircraft;
+                AircraftSetup.Fa26 = Main.playerGameObject;
+                AircraftSetup.customAircraft = aircraft;
 
-                //Creates the canopy animation
+                //Creates the canopy animation and assigns the canopyobject to the ejection seat
                 AircraftSetup.CreateCanopyAnimation();
+
 
                 //Creates the control surfaces
                 AircraftSetup.CreateControlSurfaces();
@@ -75,9 +87,15 @@ namespace CustomAircraftTemplate
 
                 AircraftSetup.SetUpMissileLaunchers();
 
+                //Disables the Fa26's wingflex so nav lights don't get screwy
+                AircraftSetup.DisableWingFlex();
                 //Assigns the correct variables for the EOTS
                 //AircraftSetup.SetUpEOTS();
 
+                //Fixes the weird shifting nav map bug. Must be called after unity mover
+                AircraftSetup.ScaleNavMap();
+
+                
                 List<InternalWeaponBay> bays = new List<InternalWeaponBay>();
                 foreach (InternalWeaponBay bay in aircraft.GetComponentsInChildren<InternalWeaponBay>(true))
                 {
@@ -86,11 +104,23 @@ namespace CustomAircraftTemplate
 
                 }
 
+                //AircraftAPI.FindInteractable("Toggle Altitude Mode").OnInteract.AddListener(logRCS);
+
+
+
                 FlightLogger.Log("Disabling mesh");
                 AircraftAPI.Disable26Mesh();
                
 
 
+            }
+        }
+
+        public static void logRCS()
+        {
+            foreach(HPEquippable hp in Main.playerGameObject.GetComponentsInChildren<HPEquippable>(true))
+            {
+                FlightLogger.Log($"RCS of idx {hp.hardpointIdx}: {hp.GetRadarCrossSection()}");
             }
         }
     }
@@ -105,11 +135,17 @@ namespace CustomAircraftTemplate
         {
 
             FlightLogger.Log("Start prefix ran in wm!");
-            if (VTOLAPI.GetPlayersVehicleGameObject() == __instance.gameObject && VTOLAPI.GetPlayersVehicleEnum() == VTOLVehicles.FA26B && AircraftInfo.AircraftSelected)
+            if (__instance.gameObject.GetComponentInChildren<PlayerFlightLogger>() && VTOLAPI.GetPlayersVehicleEnum() == VTOLVehicles.FA26B && AircraftInfo.AircraftSelected)
             {
 
-
+                //Makes missiles compatabile with the internal bays
                 AircraftSetup.SetUpMissileLaunchers();
+
+                //Reduces the rcs of the fa-26 and intiially sets the hard point rcs to 0
+                AircraftSetup.SetUpRCS();
+
+                //Folds the wings down on spawn. Runs a coroutine that waits one second to do so
+                AircraftSetup.SetWingFold();
 
             }
         }

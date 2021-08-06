@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace CustomAircraftTemplate
 {
+
     public class customTransform
     {
         public String name;
@@ -23,6 +24,7 @@ namespace CustomAircraftTemplate
 
     public class UnityMover : MonoBehaviour
     {
+        public string FileName = "";
         public GameObject gs;
 
         // Start is called before the first frame update
@@ -37,7 +39,7 @@ namespace CustomAircraftTemplate
             if (gs == null)
                 return;
             List<customTransform> listCustomTraans = new List<customTransform>();
-            string fileLocation = Path.Combine(Main.instance.ModFolder, AircraftInfo.UnityMoverFileName);
+            string fileLocation = Path.Combine(Main.instance.ModFolder, this.FileName);
             using (BinaryReader reader = new BinaryReader(File.Open(fileLocation, FileMode.Open)))
             {
 
@@ -108,10 +110,13 @@ namespace CustomAircraftTemplate
                                                     posesize = intact.poseBounds.size;
                                                     GameObject newBounds = Instantiate(AircraftAPI.SEAT_ADJUST_POSE_BOUNDS, gameObject.transform);
                                                     newBounds.name = "new" + ts.parent.name;
-                                                    newBounds.transform.position = intact.transform.parent.gameObject.transform.position;
+                                                    newBounds.transform.position = intact.transform.gameObject.transform.position;
                                                     newBounds.transform.eulerAngles = intact.transform.parent.transform.eulerAngles;
                                                     intact.poseBounds = newBounds.GetComponent<PoseBounds>(); //Assigns bounds for switch
                                                     if (resize) intact.poseBounds.size = posesize;
+                                                    
+                                       
+
                                                 }
 
 

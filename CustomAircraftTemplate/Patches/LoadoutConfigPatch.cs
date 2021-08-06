@@ -12,12 +12,57 @@ namespace CustomAircraftTemplate
     [HarmonyPatch(typeof(LoadoutConfigurator), "Initialize")]
     public static class LoadoutConfigStartPatch
     {
+        public static bool Prefix(LoadoutConfigurator __instance)
+        {
+            bool mpCheck = true;
+
+            if (MpPlugin.MPActive)
+            {
+                mpCheck = Main.instance.plugin.CheckPlaneSelected();
+
+            }
+
+            if (!AircraftInfo.AircraftSelected || VTOLAPI.GetPlayersVehicleEnum() != VTOLVehicles.FA26B) return true;
+
+            Transform parent = AircraftAPI.GetChildWithName(__instance.gameObject, "vtImage").transform;
+
+            const string hpInfo = "HardpointInfo";
+            parent.Find(hpInfo).gameObject.SetActive(false);
+            for (int i = 1; i <= 10; i++)
+            {
+                parent.Find(hpInfo + " (" + i + ")").gameObject.SetActive(false);
+            }
+            RectTransform rectTransform = parent.Find(hpInfo + " (11)").GetComponent<RectTransform>();
+            rectTransform.localPosition = new Vector3(154.2f, -114f, -2.4f);
+            rectTransform.localScale = new Vector3(2, 2, 2);
+            rectTransform = parent.Find(hpInfo + " (12)").GetComponent<RectTransform>();
+            rectTransform.localPosition = new Vector3(-154.2f, -114f, -2.4f);
+            rectTransform.localScale = new Vector3(2, 2, 2);
+
+
+            parent.Find(hpInfo + " (13)").gameObject.SetActive(false);
+            parent.Find(hpInfo + " (14)").gameObject.SetActive(false);
+            parent.Find(hpInfo + " (15)").gameObject.SetActive(false);
+
+            return true;
+        }
+
         public static void Postfix(LoadoutConfigurator __instance)
         {
-            if (!AircraftInfo.AircraftSelected) return;
+            bool mpCheck = true;
+
+            if (MpPlugin.MPActive)
+            {
+                mpCheck = Main.instance.plugin.CheckPlaneSelected();
+
+            }
+
+            if (!AircraftInfo.AircraftSelected || VTOLAPI.GetPlayersVehicleEnum() != VTOLVehicles.FA26B) return;
+
+
             __instance.AttachImmediate("fa26_tgp", 14);
             __instance.lockedHardpoints.Add(14);
-            AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(VTOLAPI.GetPlayersVehicleGameObject(), "HP14 TGP"));
+            AircraftAPI.DisableMesh(AircraftAPI.GetChildWithName(Main.playerGameObject, "HP14 TGP"));
 
         }
     }
@@ -43,7 +88,7 @@ namespace CustomAircraftTemplate
                 allowedhardpointbyweapon.Add("fa26_agm161", "");
                 allowedhardpointbyweapon.Add("fa26_aim9x2", "");
                 allowedhardpointbyweapon.Add("fa26_aim9x3", "");
-                allowedhardpointbyweapon.Add("fa26_cagm-6", "");
+                allowedhardpointbyweapon.Add("fa26_cagm-6", "11, 12");
                 allowedhardpointbyweapon.Add("fa26_cbu97x1", "11, 12");
                 allowedhardpointbyweapon.Add("fa26_droptank", "");
                 allowedhardpointbyweapon.Add("fa26_droptankXL", "");
