@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -231,9 +232,20 @@ namespace CustomAircraftTemplate
 
         public static void SetWingFold()
         {
+            Main.instance.StartCoroutine(WingFoldRoutine());
+
+        }
+
+        public static IEnumerator WingFoldRoutine()
+        {
+            yield return new WaitForSeconds(1);
+
             Fa26.GetComponentInChildren<VehicleMaster>(true).SetWingFoldImmediate(false);
             Fa26.GetComponentInChildren<FlightWarnings>(true).RemoveCommonWarning(FlightWarnings.CommonWarnings.WingFold);
-            
+
+            VRLever wingLever = AircraftAPI.FindInteractable("Wing Fold").gameObject.GetComponent<VRLever>();
+            wingLever.gameObject.GetComponent<AudioSource>().volume = 0;
+            wingLever.RemoteSetState(0);
 
         }
     }

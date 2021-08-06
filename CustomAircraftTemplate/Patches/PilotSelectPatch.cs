@@ -83,7 +83,6 @@ namespace CustomAircraftTemplate
                 {
                     Main.instance.plugin.UnSetCustomPlaneMP();
                     
-
                 }
 
 

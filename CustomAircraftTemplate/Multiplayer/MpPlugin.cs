@@ -31,7 +31,11 @@ namespace CustomAircraftTemplate
         private void MPRespawnHook(PlayerManager.CustomPlaneDef def)
         {
             FlightLogger.Log("MP Respawn Hook");
-            this.MPRadio(def.planeObj);
+            if (PlayerManager.LoadedCustomPlaneString == AircraftInfo.AircraftName && PlayerManager.PlayerIsCustomPlane)
+            {
+                this.MPRadio(def.planeObj);
+            }
+
         }
 
         public void MPRadio(GameObject f26)

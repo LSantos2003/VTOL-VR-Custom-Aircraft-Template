@@ -8,6 +8,7 @@ using UnityEngine;
 
 namespace CustomAircraftTemplate
 {
+
     public class customTransform
     {
         public String name;
@@ -23,6 +24,7 @@ namespace CustomAircraftTemplate
 
     public class UnityMover : MonoBehaviour
     {
+        public string FileName = "";
         public GameObject gs;
 
         // Start is called before the first frame update
@@ -37,7 +39,7 @@ namespace CustomAircraftTemplate
             if (gs == null)
                 return;
             List<customTransform> listCustomTraans = new List<customTransform>();
-            string fileLocation = Path.Combine(Main.instance.ModFolder, AircraftInfo.UnityMoverFileName);
+            string fileLocation = Path.Combine(Main.instance.ModFolder, this.FileName);
             using (BinaryReader reader = new BinaryReader(File.Open(fileLocation, FileMode.Open)))
             {
 

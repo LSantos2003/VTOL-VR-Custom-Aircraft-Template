@@ -26,6 +26,7 @@ namespace CustomAircraftTemplate
         public const string PreviewPngFileName = "NighthawkVehicleImage.png";
         public const string AircraftAssetbundleName = "f117";
         public const string UnityMoverFileName = "NighthawkPositions.surg";
+        public const string AIUnityMoverFileName = "NighthawkPositionsAI.surg";
 
         //Name of the prefab of your aircraft from the assetbundle
         public const string AircraftPrefabName = "Nighthawk_V5.prefab";

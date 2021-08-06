@@ -64,6 +64,10 @@
     <Reference Include="UnityEngine.AssetBundleModule">
       <HintPath>..\..\..\..\VTOLVR_Data\Managed\UnityEngine.AssetBundleModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.AudioModule, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\VTOLVR_Data\Managed\UnityEngine.AudioModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>..\Dependencies\UnityEngine.CoreModule.dll</HintPath>
     </Reference>

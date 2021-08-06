@@ -38,6 +38,7 @@ namespace CustomAircraftTemplate
                 
                 UnityMover mover = __instance.gameObject.AddComponent<UnityMover>();
                 mover.gs = __instance.gameObject;
+                mover.FileName = AircraftInfo.UnityMoverFileName;
                 mover.load(true);
                
 
@@ -103,7 +104,7 @@ namespace CustomAircraftTemplate
 
                 }
 
-                AircraftAPI.FindInteractable("Toggle Altitude Mode").OnInteract.AddListener(logRCS);
+                //AircraftAPI.FindInteractable("Toggle Altitude Mode").OnInteract.AddListener(logRCS);
 
 
 
@@ -143,7 +144,7 @@ namespace CustomAircraftTemplate
                 //Reduces the rcs of the fa-26 and intiially sets the hard point rcs to 0
                 AircraftSetup.SetUpRCS();
 
-                //Folds the wings down on spawn
+                //Folds the wings down on spawn. Runs a coroutine that waits one second to do so
                 AircraftSetup.SetWingFold();
 
             }

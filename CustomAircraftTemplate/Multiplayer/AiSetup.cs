@@ -16,6 +16,11 @@ namespace CustomAircraftTemplate
 
         public static void CreateAi(GameObject aiObject)
         {
+			UnityMover mover = aiObject.gameObject.AddComponent<UnityMover>();
+			mover.gs = aiObject.gameObject;
+			mover.FileName = AircraftInfo.AIUnityMoverFileName;
+			mover.load(false);
+
 			Disable26MeshAi(aiObject);
 
 			GameObject aircraft = Instantiate<GameObject>(Main.aircraftPrefab);
@@ -31,7 +36,10 @@ namespace CustomAircraftTemplate
 			gearAnim.OnOpen.AddListener(new UnityAction(animToggle.Retract));
 			gearAnim.OnClose.AddListener(new UnityAction(animToggle.Deploy));
 
-			CreateControlSurfaces(aircraft, aiObject);
+			CreateControlSurfaces(aiObject, aircraft);
+
+			SetUpRefuelPort(aiObject, aircraft);
+
 			SetUpRCS(aiObject);
 		}
 
@@ -42,7 +50,7 @@ namespace CustomAircraftTemplate
 			
 		}
 
-		public static void CreateControlSurfaces(GameObject customAircraft, GameObject aiAircraft)
+		public static void CreateControlSurfaces(GameObject aiAircraft, GameObject customAircraft)
 		{
 
 			AeroController controller = aiAircraft.GetComponentInChildren<AeroController>();
@@ -68,6 +76,16 @@ namespace CustomAircraftTemplate
 			{
 				hp.rcsMasked = true;
 			}
+		}
+
+		public static void SetUpRefuelPort(GameObject aiAircraft, GameObject customAircraft)
+		{
+			RefuelPort port = aiAircraft.GetComponentInChildren<RefuelPort>();
+			AnimationToggle animToggle = AircraftAPI.GetChildWithName(customAircraft, "fuelPort").GetComponent<AnimationToggle>();
+
+			port.OnOpen.AddListener(animToggle.Deploy);
+			port.OnClose.AddListener(animToggle.Retract);
+
 		}
 
 
