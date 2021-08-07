@@ -41,6 +41,8 @@ namespace CustomAircraftTemplate
 			SetUpRefuelPort(aiObject, aircraft);
 
 			SetUpRCS(aiObject);
+
+			SetUpRadarIcon(aiObject);
 		}
 
 		public static void Disable26MeshAi(GameObject go)
@@ -87,6 +89,13 @@ namespace CustomAircraftTemplate
 			port.OnClose.AddListener(animToggle.Retract);
 
 		}
+
+		public static void SetUpRadarIcon(GameObject aiAircraft)
+        {
+			Radar radar = aiAircraft.GetComponentInChildren<Radar>(true);
+			radar.radarSymbol = "17";
+
+        }
 
 
 	}
