@@ -9,14 +9,8 @@ using UnityEngine;
 
 namespace CustomAircraftTemplate
 {
+
     [HarmonyPatch(typeof(LoadoutConfigurator), "Initialize")]
-    public static class LoadoutConfig
-    {
-
-
-
-    }
-        [HarmonyPatch(typeof(LoadoutConfigurator), "Initialize")]
     public static class LoadoutConfigStartPatch
     {
         public static bool Prefix(LoadoutConfigurator __instance)
