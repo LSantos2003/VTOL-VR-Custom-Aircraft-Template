@@ -15,13 +15,6 @@ namespace CustomAircraftTemplate
     {
         public static bool Prefix(LoadoutConfigurator __instance)
         {
-            bool mpCheck = true;
-
-            if (MpPlugin.MPActive)
-            {
-                mpCheck = Main.instance.plugin.CheckPlaneSelected();
-
-            }
 
             if (!AircraftInfo.AircraftSelected || VTOLAPI.GetPlayersVehicleEnum() != VTOLVehicles.FA26B) return true;
 
@@ -50,13 +43,6 @@ namespace CustomAircraftTemplate
 
         public static void Postfix(LoadoutConfigurator __instance)
         {
-            bool mpCheck = true;
-
-            if (MpPlugin.MPActive)
-            {
-                mpCheck = Main.instance.plugin.CheckPlaneSelected();
-
-            }
 
             if (!AircraftInfo.AircraftSelected || VTOLAPI.GetPlayersVehicleEnum() != VTOLVehicles.FA26B) return;
 
