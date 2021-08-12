@@ -222,7 +222,7 @@ namespace CustomAircraftTemplate
         {
             RadarCrossSection rcs = Fa26.GetComponent<RadarCrossSection>();
             rcs.size = 7.381652f;
-            rcs.overrideMultiplier = 0.5f;
+            rcs.overrideMultiplier = 0.25f;
 
             foreach(HPEquippable hp in Fa26.GetComponentsInChildren<HPEquippable>(true))
             {
@@ -247,6 +247,11 @@ namespace CustomAircraftTemplate
             wingLever.gameObject.GetComponent<AudioSource>().volume = 0;
             wingLever.RemoteSetState(0);
 
+        }
+
+        public static void ChangeRWRIcon()
+        {
+            Fa26.GetComponentInChildren<Radar>(true).radarSymbol = "custom";
         }
     }
 }

@@ -95,6 +95,8 @@ namespace CustomAircraftTemplate
                 //Fixes the weird shifting nav map bug. Must be called after unity mover
                 AircraftSetup.ScaleNavMap();
 
+                //Changes the player's rwr icon to "custom" in order for other mods to know it's a custom plane
+                AircraftSetup.ChangeRWRIcon();
                 
                 List<InternalWeaponBay> bays = new List<InternalWeaponBay>();
                 foreach (InternalWeaponBay bay in aircraft.GetComponentsInChildren<InternalWeaponBay>(true))

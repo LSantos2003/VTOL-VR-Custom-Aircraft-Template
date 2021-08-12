@@ -72,7 +72,7 @@ namespace CustomAircraftTemplate
 		{
 			RadarCrossSection rcs = aiAircraft.GetComponent<RadarCrossSection>();
 			rcs.size = 7.381652f;
-			rcs.overrideMultiplier = 0.5f;
+			rcs.overrideMultiplier = 0.25f;
 
 			foreach (HPEquippable hp in aiAircraft.GetComponentsInChildren<HPEquippable>(true))
 			{
