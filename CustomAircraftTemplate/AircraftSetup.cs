@@ -236,6 +236,18 @@ namespace CustomAircraftTemplate
 
         }
 
+        public static void SetUpHook()
+        {
+            Tailhook hook = Fa26.GetComponentInChildren<Tailhook>(true);
+            RotationToggle rotation = AircraftAPI.GetChildWithName(customAircraft, "hook_BayDoor").GetComponent<RotationToggle>();
+            hook.hookDoor = rotation;
+        }
+
+        public static void SetUpGLimit()
+        {
+            Fa26.GetComponent<FlightAssist>().gLimit = 5f;
+        }
+
         public static IEnumerator WingFoldRoutine()
         {
             yield return new WaitForSeconds(1);

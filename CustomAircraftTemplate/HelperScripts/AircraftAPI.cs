@@ -124,7 +124,7 @@ namespace CustomAircraftTemplate
             DisableMesh(GetChildWithName(go, "Canopy"), wm);
             DisableMesh(GetChildWithName(go, "windshield"), wm);
             DisableMesh(GetChildWithName(go, "dash"), wm);
-            DisableMesh(GetChildWithName(go, "HookTurret"), wm);
+            //DisableMesh(GetChildWithName(go, "HookTurret"), wm);
             DisableMesh(GetChildWithName(go, "airbrakeParent"), wm);
             DisableMesh(GetChildWithName(go, "HP14 TGP"));
 

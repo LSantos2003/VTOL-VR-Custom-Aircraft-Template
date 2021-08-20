@@ -97,7 +97,13 @@ namespace CustomAircraftTemplate
 
                 //Changes the player's rwr icon to "custom" in order for other mods to know it's a custom plane
                 AircraftSetup.ChangeRWRIcon();
-                
+
+                //Attaches the Nigthhawk's hook door to the fa26 hook
+                AircraftSetup.SetUpHook();
+
+                //Limits the max g to 4 when flight assist is on
+                AircraftSetup.SetUpGLimit();
+
                 List<InternalWeaponBay> bays = new List<InternalWeaponBay>();
                 foreach (InternalWeaponBay bay in aircraft.GetComponentsInChildren<InternalWeaponBay>(true))
                 {
