@@ -40,11 +40,21 @@ namespace CustomAircraftTemplate
 
 			SetUpRefuelPort(aiObject, aircraft);
 
+			SetUpEngines(aiObject);
+
 			SetUpRCS(aiObject);
 
 			SetUpRadarIcon(aiObject);
 		}
 
+		public static void SetUpEngines(GameObject aiAircraft)
+		{
+		
+			foreach (ModuleEngine e in aiAircraft.GetComponentsInChildren<ModuleEngine>(true))
+			{
+				e.autoAB = false;
+			}
+		}
 		public static void Disable26MeshAi(GameObject go)
 		{
 			WeaponManager componentInChildren = go.GetComponentInChildren<WeaponManager>(true);

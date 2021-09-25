@@ -109,8 +109,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>IF EXIST "D:\SteamLibrary\steamapps\common\VTOL VR\VTOLVR_ModLoader\VTOLVR-ModLoader.exe" (
-copy "$(TargetPath)" "D:\SteamLibrary\steamapps\common\VTOL VR\VTOLVR_ModLoader\My Mods\Custom Aircraft Template\Builds\CustomAircraftTemplate.dll"
+    <PostBuildEvent>IF EXIST "C:\Program Files (x86)\Steam\steamapps\common\VTOL VR" (
+copy "$(TargetPath)" "C:\Program Files (x86)\Steam\steamapps\common\VTOL VR\My Mods\Custom Aircraft Template\Builds\CustomAircraftTemplate.dll"
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>
